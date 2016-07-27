@@ -6,7 +6,7 @@ var gulp = require('gulp'),
   uglify = require('gulp-uglify'),
   sass = require('gulp-sass'),
   sourcemaps = require('gulp-sourcemaps'),
-  rigger = require('gulp-rigger'),
+  include = require('gulp-file-include'),
   cssmin = require('gulp-clean-css'),
   imagemin = require('gulp-imagemin'),
   pngquant = require('imagemin-pngquant'),
@@ -29,15 +29,16 @@ var path = {
   src: { //Пути откуда брать исходники
     html: 'src/*.html', //Синтаксис src/*.html говорит gulp что мы хотим взять все файлы с расширением .html
     js: 'src/js/main.js',//В стилях и скриптах нам понадобятся только main файлы
-    style: 'src/css/main.scss',
-    sprite: 'src/css/blocks/',
+    style: 'src/scss/main.scss',
+    sprite: 'src/blocks/',
     img: 'src/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
     font: 'src/font/**/*.*'
   },
   watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
     html: 'src/**/*.html',
     js: 'src/js/**/*.js',
-    style: 'src/css/**/*.scss',
+    style: 'src/scss/**/*.scss',
+	  style1: 'src/blocks/**/*.scss',
     img: 'src/img/**/*.*',
     font: 'src/font/**/*.*'
   },
@@ -72,16 +73,26 @@ gulp.task('sprite', function () {
   //// Pipe CSS stream through CSS optimizer and onto disk
   var cssStream = spriteData.css
     //.pipe(cssmin())
-    .pipe(gulp.dest('src/css/blocks/'));
+    .pipe(gulp.dest('src/blocks/'));
   //
   //// Return a merged stream to handle both `end` events
   //return merge(imgStream, cssStream);
 });
 
 
+gulp.task('fileinclude', function() {
+  gulp.src(['index.html'])
+    .pipe(fileinclude({
+      prefix: '@@',
+      basepath: '@file'
+    }))
+    .pipe(gulp.dest('./'));
+});
+
 gulp.task('html:build', function () {
   gulp.src(path.src.html) //Выберем файлы по нужному пути
-    .pipe(rigger()) //Прогоним через rigger
+    //.pipe(rigger()) //Прогоним через rigger
+	.pipe(include({prefix: '@@'}))
     .pipe(gulp.dest(path.build.html)) //Выплюнем их в папку build
     .pipe(reload({stream: true})); //И перезагрузим наш сервер для обновлений
 });
@@ -89,7 +100,7 @@ gulp.task('html:build', function () {
 
 gulp.task('js:build', function () {
   gulp.src(path.src.js) //Найдем наш main файл
-    .pipe(rigger()) //Прогоним через rigger
+    //.pipe(rigger()) //Прогоним через rigger
     //.pipe(sourcemaps.init()) //Инициализируем sourcemap
     //.pipe(uglify()) //Сожмем наш js
     //.pipe(sourcemaps.write()) //Пропишем карты
@@ -140,7 +151,7 @@ gulp.task('watch', function () {
   watch([path.watch.html], function (event, cb) {
     gulp.start('html:build');
   });
-  watch([path.watch.style], function (event, cb) {
+  watch([path.watch.style, path.watch.style1], function (event, cb) {
     gulp.start('style:build');
   });
   watch([path.watch.js], function (event, cb) {

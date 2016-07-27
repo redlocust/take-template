@@ -1,0 +1,17 @@
+// ВНИМАНИЕ! В этом файле нельзя использовать блочные комментарии (/* ... */), только строчные! (//)
+// В этом файле нельзя писать селекторы! Есть несколько глобальных файлов стилей, остальное должно
+// быть по принципу БЭМ-блок = отдельный файл!
+
+@import 'variables';
+//@import './src/less/mixins/mixins.less';
+//
+@import 'global/global-scaffolding';
+//@import './src/less/global/global-print.less';
+//@import './src/less/global/global-grid.less';
+//@import './src/less/global/global-forms.less';
+//@import './src/less/global/global-tables.less';
+
+// @import './src/blocks/demo-block/demo-block.less';
+@import '../blocks/page-header/page-header';
+@import '../blocks/page-footer/page-footer';
+
