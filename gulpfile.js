@@ -38,7 +38,7 @@ var path = {
     html: 'src/**/*.html',
     js: 'src/js/**/*.js',
     style: 'src/scss/**/*.scss',
-	  style1: 'src/blocks/**/*.scss',
+    style1: 'src/blocks/**/*.scss',
     img: 'src/img/**/*.*',
     font: 'src/font/**/*.*'
   },
@@ -66,8 +66,8 @@ gulp.task('sprite', function () {
 
   //// Pipe image stream through image optimizer and onto disk
   var imgStream = spriteData.img
-  //  // DEV: We must buffer our stream into a Buffer for `imagemin`
-  //  .pipe(imagemin())
+    //  // DEV: We must buffer our stream into a Buffer for `imagemin`
+    //  .pipe(imagemin())
     .pipe(gulp.dest('build/img/sprite/'));
   //
   //// Pipe CSS stream through CSS optimizer and onto disk
@@ -80,7 +80,7 @@ gulp.task('sprite', function () {
 });
 
 
-gulp.task('fileinclude', function() {
+gulp.task('fileinclude', function () {
   gulp.src(['index.html'])
     .pipe(fileinclude({
       prefix: '@@',
@@ -92,7 +92,7 @@ gulp.task('fileinclude', function() {
 gulp.task('html:build', function () {
   gulp.src(path.src.html) //Выберем файлы по нужному пути
     //.pipe(rigger()) //Прогоним через rigger
-	.pipe(include({prefix: '@@'}))
+    .pipe(include({prefix: '@@'}))
     .pipe(gulp.dest(path.build.html)) //Выплюнем их в папку build
     .pipe(reload({stream: true})); //И перезагрузим наш сервер для обновлений
 });
@@ -112,7 +112,9 @@ gulp.task('style:build', function () {
   gulp.src(path.src.style) //Выберем наш main.scss
     .pipe(sourcemaps.init()) //То же самое что и с js
     .pipe(plumber())
-    .pipe(sass()) //Скомпилируем
+    .pipe(sass({
+      includePaths: require('node-normalize-scss').includePaths
+    })) //Скомпилируем
     .pipe(prefixer()) //Добавим вендорные префиксы
     .pipe(cssmin()) //Сожмем
     //.pipe(sourcemaps.write())

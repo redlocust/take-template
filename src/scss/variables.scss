@@ -7,6 +7,7 @@ $gray:                        #808080;
 $gray-light:                  #b1b1b1;
 $gray-lighter:                #eceeef;
 $gray-lightest:               #f7f7f9;
+$white:                       #ffffff;
 
 $color-main:                  #0275d8;
 $color-success:               #5cb85c;
@@ -16,7 +17,7 @@ $color-danger:                #d9534f;
 
 // Семантические цвета
 
-$text-color:                  $gray-darkest;
+$text-color:                  $white;
 $text-color--muted:           $gray;
 $body-bg:                     #fff;
 
@@ -42,7 +43,7 @@ $font-size--small-percent:    75%;
 
 $line-height:                 1.375em;
 
-$font-family:                 -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+$font-family:                 'Open Sans', -apple-system, BlinkMacSystemFont, 'Roboto', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
 $font-family--serif:          Georgia, 'Times New Roman', Times, serif;
 $font-family--monospace:      Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 $font-family--headings:       $font-family;

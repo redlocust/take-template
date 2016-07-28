@@ -1,7 +1,7 @@
 // ВНИМАНИЕ! В этом файле нельзя использовать блочные комментарии (/* ... */), только строчные! (//)
 // В этом файле нельзя писать селекторы! Есть несколько глобальных файлов стилей, остальное должно
 // быть по принципу БЭМ-блок = отдельный файл!
-
+@import "normalize";
 @import 'variables';
 //@import './src/less/mixins/mixins.less';
 //
@@ -10,6 +10,9 @@
 //@import './src/less/global/global-grid.less';
 //@import './src/less/global/global-forms.less';
 //@import './src/less/global/global-tables.less';
+
+@import "vendors/bourbon/bourbon";
+@import "vendors/neat/neat";
 
 // @import './src/blocks/demo-block/demo-block.less';
 @import '../blocks/page-header/page-header';

@@ -1,16 +1,54 @@
 .page-header {
+  max-width: 1920px;
   min-height: 950px;
-  width: 100%;
-  background: url('../img/page-header-bg.jpg') no-repeat scroll;
+  background: url('../img/page-header-bg.jpg') no-repeat;
   background-size: cover;
+  position: relative;
+
+  &__inner {
+    @include outer-container;
+    padding: 0 10px;
+  }
+
+
+  &__logo {
+    padding-top: 53px;
+    margin-bottom: 350px;
+    display: block;
+  }
+
+  &__content {
+    max-width: 500px;
+  }
+
+  &__title {
+    font-size: 60px;
+    font-weight: 300;
+  }
+
+  &__text {
+    font-size: 13px;
+  }
 
   &__device {
     float: right;
     width: 716px;
     height: 918px;
-    position: relative;
+    right: 15vw;
+    top: 15vw;
+    position: absolute;
     background: url('../img/page-header-device.png') no-repeat scroll;
     background-size: cover;
     z-index: 99999;
+  }
+
+  &__screen {
+    position: absolute;
+    top: 95px;
+    left: 375px;
+    width: 254px;
+    height: 665px;
+    background: url('../img/page-header-screen.png') no-repeat scroll;
+    background-size: cover;
   }
 }
