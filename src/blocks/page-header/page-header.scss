@@ -1,19 +1,28 @@
 .page-header {
   max-width: 1920px;
-  min-height: 950px;
+
+  min-height: 500px;
+
+  @include media($screen-xl) {
+    min-height: 950px;
+  }
   background: url('../img/page-header-bg.jpg') no-repeat;
   background-size: cover;
   position: relative;
 
   &__inner {
     @include outer-container;
+    $mobile: new-breakpoint(max-width 500px 4);
     padding: 0 10px;
   }
 
-
   &__logo {
     padding-top: 53px;
-    margin-bottom: 350px;
+    margin-bottom: 100px;
+
+    @include media($screen-xl) {
+      margin-bottom: 350px;
+    }
     display: block;
   }
 
@@ -31,15 +40,20 @@
   }
 
   &__device {
-    float: right;
-    width: 716px;
-    height: 918px;
-    right: 15vw;
-    top: 15vw;
-    position: absolute;
-    background: url('../img/page-header-device.png') no-repeat scroll;
-    background-size: cover;
-    z-index: 99999;
+    display: none;
+
+    @include media($screen-xl) {
+      display: block;
+      float: right;
+      width: 716px;
+      height: 918px;
+      right: 15vw;
+      top: 15vw;
+      position: absolute;
+      background: url('../img/page-header-device.png') no-repeat scroll;
+      background-size: cover;
+      z-index: 99999;
+    }
   }
 
   &__screen {
